@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import User from './User';
+import { User, SecondUser } from './User';
+
 function App() {
+  const name = "Matt";
+  const age = 29;
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +21,8 @@ function App() {
           Learn React
         </a>
       
-        <User /> 
+        <User name={name} age={age} />
+        <SecondUser />
       </header>
     </div>
   );
