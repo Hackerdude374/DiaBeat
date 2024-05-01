@@ -16,11 +16,9 @@ import pandas as pd
 import pickle 
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from flask import Flask, render_template, request
 
 # Read the dataset (CSV file) into a pandas DataFrame
-
-
-
 df = pd.read_csv('diabetes.csv')
 
 
@@ -43,13 +41,14 @@ knn.fit(X_train, y_train)
 
 #pickle data to serialize the file then deserialize it back (save model as pickle file)
 
-pickle.dump(knn, open('example_weights_knn.pkl', "wb"))
+model = pickle.load(open("example_weights_knn.pkl", "rb"))
+
 
 @app.route('/')
 def use_template():
     return render_template("index.html") #frontend calling
 
-@app.route('/predict', methods=['POST', 'GET'])
+@app.route('/predict',methods=['POST', 'GET'])
 def predict():
     input_1 = request.form['1']
     input_2 = request.form['2']
