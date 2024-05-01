@@ -37,6 +37,9 @@ knn.fit(X_train, y_train)
 
 # knn_score = knn.score(X_test, y_test)
 
+#pickle data to serialize the file then deserialize it back (save model as pickle file)
+
+pickle.dump(knn, open('example_weights_knn.pkl', "wb"))
 
 
 
