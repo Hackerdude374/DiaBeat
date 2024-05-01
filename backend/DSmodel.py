@@ -45,6 +45,24 @@ pickle.dump(knn, open('example_weights_knn.pkl', "wb"))
 
 
 
+#this will be called in app.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # The above code prepares the dataset and trains a KNN classifier to predict diabetes outcomes.
