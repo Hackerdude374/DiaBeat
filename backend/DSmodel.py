@@ -76,8 +76,8 @@ def predict():
      return render_template('result.html', pred=f 'you have a low chance of diabetes which is currently considered good your probability is {output} ')
     
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 80)
-
+    # app.run(host = '0.0.0.0', port = 80)
+    app.run(debug=True) #default flask port
 
 
 
