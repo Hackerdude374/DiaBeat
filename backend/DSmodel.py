@@ -65,10 +65,12 @@ def predict():
 
     # Make predictions using the loaded model
     diabetes_prediction = model.predict_proba(setup_df)
-    output = diabetes_prediction[0][1] * 100  # Convert probability to percentage
+    output = '{0:.{1}f}'.format(diabetes_prediction[0][1],2)
+    output = str(float(output)*100) + '%'
+    
 
     # Decide prediction based on probability threshold
-    if output > 50:
+    if output str(0.5)
         pred_message = f'You have a {output:.2f}% chance of having diabetes based on our KNN model.'
     else:
         pred_message = f'You have a low chance of having diabetes based on our KNN model. Probability of having Diabetes is {output:.2f}%.'
@@ -76,6 +78,8 @@ def predict():
     # Render the result template with the prediction message
     return render_template('result.html', pred=pred_message)
 
+if __name__ == '__main__':
+    app.run(host = '0.0.0.0', port = 80)
 
 
 
