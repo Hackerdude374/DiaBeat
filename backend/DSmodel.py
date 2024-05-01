@@ -52,9 +52,6 @@ pickle.dump(knn, open('example_weights_knn.pkl', "wb"))
 
 
 
-
-
-
 # The above code prepares the dataset and trains a KNN classifier to predict diabetes outcomes.
 # Here's how it relates to your application:
 # - We're using the Pima Indians Diabetes Database from Kaggle, which contains various health parameters.
