@@ -18,7 +18,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
 # Read the dataset (CSV file) into a pandas DataFrame
+
+
+
 df = pd.read_csv('diabetes.csv')
+
 
 # Separate the features (X) and target variable (y) from the DataFrame
 X = df.drop('Outcome', axis=1) #- When we use `axis=1` in `df.drop('Outcome', axis=1)`, we're specifying that the operation
