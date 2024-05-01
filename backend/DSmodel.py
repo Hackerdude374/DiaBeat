@@ -45,8 +45,36 @@ knn.fit(X_train, y_train)
 
 pickle.dump(knn, open('example_weights_knn.pkl', "wb"))
 
+@app.route('/')
+def use_template():
+    return render_template("index.html") #frontend calling
 
+@app.route('/predict', methods=['POST', 'GET'])
+def predict():
+    input_1 = request.form['1']
+    input_2 = request.form['2']
+    input_3 = request.form['3']
+    input_4 = request.form['4']
+    input_5 = request.form['5']
+    input_6 = request.form['6']
+    input_7 = request.form['7']
+    input_8 = request.form['8']
 
+    # Setup input data as a DataFrame
+    setup_df = pd.DataFrame([[input_1, input_2, input_3, input_4, input_5, input_6, input_7, input_8]])
+
+    # Make predictions using the loaded model
+    diabetes_prediction = model.predict_proba(setup_df)
+    output = diabetes_prediction[0][1] * 100  # Convert probability to percentage
+
+    # Decide prediction based on probability threshold
+    if output > 50:
+        pred_message = f'You have a {output:.2f}% chance of having diabetes based on our KNN model.'
+    else:
+        pred_message = f'You have a low chance of having diabetes based on our KNN model. Probability of having Diabetes is {output:.2f}%.'
+
+    # Render the result template with the prediction message
+    return render_template('result.html', pred=pred_message)
 
 
 
