@@ -70,14 +70,11 @@ def predict():
     
 
     # Decide prediction based on probability threshold
-    if output str(0.5)
-        pred_message = f'You have a {output:.2f}% chance of having diabetes based on our KNN model.'
-    else:
-        pred_message = f'You have a low chance of having diabetes based on our KNN model. Probability of having Diabetes is {output:.2f}%.'
-
-    # Render the result template with the prediction message
-    return render_template('result.html', pred=pred_message)
-
+    if output >str(0.5):
+        return render_template('result.html', pred=f 'You have the following chance of diabetes based on our KNN model is {output} ')
+else:
+    return render_template('result.html', pred=f 'you have a low chance of diabetes which is currently considered good your probability is {output} ')
+    
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 80)
 
