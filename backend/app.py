@@ -41,10 +41,13 @@ import pickle
 #      return render_template('result.html', pred=f'you have a low chance of diabetes which is currently considered good your probability is {output} ')
     
     
-    
+#debugging 
 app = Flask(__name__)
+
 @app.route('/')
 
 def index(): #index.html
+    
     if __name__ == '__main__':
+        
         app.run(debug=True)
