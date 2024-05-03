@@ -42,13 +42,15 @@ def predict():
     
     
     
-#debugging 
-# app = Flask(__name__)
+# debugging 
+app = Flask(__name__)
 
-# @app.route('/')
+@app.route('/')
 
-# def index(): #index.html
+def index(): #index.html
     
-#     if __name__ == '__main__':
+    if __name__ == '__main__':
         
-#         app.run(debug=True)
+        app.run(debug=True)
+        
+print(app.debug) # should print True
