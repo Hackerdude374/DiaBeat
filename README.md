@@ -43,6 +43,10 @@ To enable the debugger while running the application, follow these steps:
     ```
     $ export FLASK_DEBUG=1
     ```
+    Or in powershell:
+    ```
+    $env:FLASK_DEBUG = 1
+    ```
 
 2. Verify that debug mode is properly set by running:
     ```
