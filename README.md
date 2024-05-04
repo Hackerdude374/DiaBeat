@@ -4,18 +4,7 @@
 
 1. Open a terminal and navigate to the `/backend` directory of the project.
 
-2. Set Flask debug mode by running the following command:
-    ```
-    $ export FLASK_DEBUG=1
-    ```
-
-3. Verify that debug mode is enabled by running:
-    ```
-    $ echo $FLASK_DEBUG
-    ```
-   If the output is `1`, debug mode is properly set.
-
-4. Start the Flask server by running:
+2. Start the Flask server by running:
     ```
     $ flask run
     ```
