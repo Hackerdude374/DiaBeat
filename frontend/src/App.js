@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './DiaBeatLogo.svg';
 import './App.css';
 import Form from './Form';
 function App() {
