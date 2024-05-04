@@ -1,4 +1,5 @@
-import logo from './DiaBeatLogo.svg';
+import diabeatLogo from './DiaBeatLogo.png';
+
 import './App.css';
 import Form from './Form';
 function App() {
@@ -6,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={diabeatLogo} className="App-logo" alt="DiaBeatLogo" />
 
       <Form />
 
