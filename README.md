@@ -53,3 +53,4 @@ To enable the debugger while running the application, follow these steps:
     ```
 
 With the debugger properly set up, you can now debug your Flask application effectively.
+
