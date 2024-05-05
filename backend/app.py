@@ -1,14 +1,18 @@
 from flask import Flask, request, url_for, redirect, render_template
 import pandas as pd
 import pickle
-
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__) 
-
+CORS(app)
 model = pickle.load(open("example_weights_knn.pkl", "rb"))
 
 #when u visit websites, its index.html
 
+@app.route('/some-route')
+@cross_origin()  # Apply CORS to this specific route
+def some_route():
+    return 'This route has CORS enabled.'
 
 
 @app.route('/')
@@ -31,14 +35,23 @@ if __name__ == '__main__':
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
     # Dummy inputs for postman testing
-    input_one = 5
-    input_two = 120
-    input_three = 80
-    input_four = 30
-    input_five = 100
-    input_six = 25
-    input_seven = 0.5
-    input_eight = 40
+    # input_one = 5
+    # input_two = 120
+    # input_three = 80
+    # input_four = 30
+    # input_five = 100
+    # input_six = 25
+    # input_seven = 0.5
+    # input_eight = 40
+    
+    input_one = request.form['1']
+    input_two = request.form['2']
+    input_three = request.form['3']
+    input_four = request.form['4']
+    input_five = request.form['5']
+    input_six = request.form['6']
+    input_seven = request.form['7']
+    input_eight = request.form['8']
 
     # Setup input data as a DataFrame
     setup_df = pd.DataFrame([[input_one, input_two, input_three, input_four, input_five, input_six, input_seven, input_eight]])
@@ -49,7 +62,7 @@ def predict():
     output = str(float(output) * 100) + '%'
 
     # Decide prediction based on probability threshold
-    if float(output) > 0.5:
+    if output>str(0.5):
         return render_template('result.html', pred=f'You have the following chance of diabetes based on our KNN model is {output} ')
     else:
         return render_template('result.html', pred=f'You have a low chance of diabetes which is currently considered good. Your probability is {output} ')
