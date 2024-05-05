@@ -12,7 +12,8 @@ function Form() {
     diabetes_pedigree: "",
     age: "",
   });
-const [result, setResult] = useState(""); //result display
+  const [result, setResult] = useState(""); //result display
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -53,62 +54,66 @@ const [result, setResult] = useState(""); //result display
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h4 className="form-title">Diabetes Prediction Model</h4>
-        <input
-          type="number"
-          name="pregnancies"
-          onChange={onChange}
-          placeholder="Number of Pregnancies"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="glucose"
-          onChange={onChange}
-          placeholder="Glucose Level"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="blood_pressure"
-          onChange={onChange}
-          placeholder="Blood Pressure"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="skin_thickness"
-          onChange={onChange}
-          placeholder="Skin Thickness"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="insulin_level"
-          onChange={onChange}
-          placeholder="Insulin Level"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="bmi"
-          onChange={onChange}
-          placeholder="BMI (Body Mass Index)"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="diabetes_pedigree"
-          onChange={onChange}
-          placeholder="Diabetes Pedigree Function"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="age"
-          onChange={onChange}
-          placeholder="Age"
-          className="form-input"
-        />
+        <div className="form-column">
+          <input
+            type="number"
+            name="pregnancies"
+            onChange={onChange}
+            placeholder="Number of Pregnancies"
+            className="form-input"
+          />
+          <input
+            type="number"
+            name="glucose"
+            onChange={onChange}
+            placeholder="Glucose Level"
+            className="form-input"
+          />
+          <input
+            type="number"
+            name="blood_pressure"
+            onChange={onChange}
+            placeholder="Blood Pressure"
+            className="form-input"
+          />
+          <input
+            type="number"
+            name="skin_thickness"
+            onChange={onChange}
+            placeholder="Skin Thickness"
+            className="form-input"
+          />
+        </div>
+        <div className="form-column">
+          <input
+            type="number"
+            name="insulin_level"
+            onChange={onChange}
+            placeholder="Insulin Level"
+            className="form-input"
+          />
+          <input
+            type="number"
+            name="bmi"
+            onChange={onChange}
+            placeholder="BMI (Body Mass Index)"
+            className="form-input"
+          />
+          <input
+            type="number"
+            name="diabetes_pedigree"
+            onChange={onChange}
+            placeholder="Diabetes Pedigree Function"
+            className="form-input"
+          />
+          <input
+            type="number"
+            name="age"
+            onChange={onChange}
+            placeholder="Age"
+            className="form-input"
+          />
+        </div>
         <button type="submit" className="form-button">Submit Form</button>
         {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
       </form>
