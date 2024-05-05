@@ -53,7 +53,7 @@ function Form() {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <h4 className="form-title">Diabetes Prediction Model</h4>
+        <h4 className="form-title">Diabeat: The #1 Diabetes Prediction Model</h4>
         <div className="form-column">
           <input
             type="number"
