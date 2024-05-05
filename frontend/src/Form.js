@@ -12,27 +12,32 @@ function Form() {
     diabetes_pedigree: "",
     age: "",
   });
-// fetch data
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const form_data = new FormData();
-    //append form inputs
     form_data.append("1", form.pregnancies);
     form_data.append("2", form.glucose);
-    form_data.append("3", form.blood_pressure);
+    form_data.append("3", form.blood_pressure); // Changed from blood_presure
     form_data.append("4", form.skin_thickness);
     form_data.append("5", form.insulin_level);
     form_data.append("6", form.bmi);
     form_data.append("7", form.diabetes_pedigree);
     form_data.append("8", form.age);
-    
-    fetch('http://127.0.0.1:5000/predict',{
-      method:'POST',
+
+    fetch('http://127.0.0.1:5000/predict', {
+      method: 'POST',
       body: form_data
     })
-    .then(response => console.log(response))
-
+    .then(response => response.text()) // Assuming response is JSON
+    .then(data => {
+      // Handle response data, update state, etc.
+      console.log(data); // For demonstration, log the response data
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
 
   const onChange = (event) => {
@@ -45,7 +50,6 @@ function Form() {
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h4 className="form-title">Diabetes Prediction Model</h4>
-        {/* <p> Example to Predict Probability of Diabetes</p> */}
         <input
           type="number"
           name="pregnancies"
