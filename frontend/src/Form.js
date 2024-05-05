@@ -12,7 +12,7 @@ function Form() {
     diabetes_pedigree: "",
     age: "",
   });
-
+const [result, setResult] = useState(""); //result display
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -31,6 +31,9 @@ function Form() {
       body: form_data
     })
     .then(response => response.text()) // Assuming response is JSON
+    .then(html =>{
+      setResult(html);
+    })
     .then(data => {
       // Handle response data, update state, etc.
       console.log(data); // For demonstration, log the response data
@@ -107,6 +110,7 @@ function Form() {
           className="form-input"
         />
         <button type="submit" className="form-button">Submit Form</button>
+        {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
       </form>
     </div>
   );
