@@ -2,6 +2,12 @@
 
 This is a web application for predicting diabetes using a KNN model. The application allows users to input various health parameters and receive a prediction of whether they are likely to have diabetes or not.
 
+## Setting up the App
+
+1. run git pull in the main directory of the project (in my case its Diabeat)
+ ```
+ git pull
+```
 
 
 ## Running the Application
