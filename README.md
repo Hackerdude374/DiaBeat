@@ -4,6 +4,8 @@ This is a web application for predicting diabetes using a KNN model. The applica
 
 ## Setting up the App
 
+Navigate to Visual Studio Code (VSCode) and make sure you are running it as an administrator.
+
 1. run git pull in the main directory of the project (in my case its Diabeat) to get the latest changes.
  ```
  git pull
