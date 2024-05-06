@@ -20,7 +20,7 @@ npm i --force
  
 4. Navigate to the `\backend` directory of the project and run this to ensure you get the patest packabges/libraries.
 ```
-pip install --upgrade --force-reinstall -r requirements.txt
+pip install --upgrade --force-reinstall -r installed_packages.txt
 
 ```
 
