@@ -4,11 +4,25 @@ This is a web application for predicting diabetes using a KNN model. The applica
 
 ## Setting up the App
 
-1. run git pull in the main directory of the project (in my case its Diabeat)
+1. run git pull in the main directory of the project (in my case its Diabeat) to get the latest changes.
  ```
  git pull
 ```
+2. or just in case run 
+```
+git pull origin
+```
 
+3. Navigate to the `\frontend ` directory of the project, and run this to ensure you get the latest packages/libraries.
+```
+npm i --force
+```
+ 
+4. Navigate to the `\backend` directory of the project and run this to ensure you get the patest packabges/libraries.
+```
+pip install --upgrade --force-reinstall -r requirements.txt
+
+```
 
 ## Running the Application
 
