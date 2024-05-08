@@ -1,7 +1,10 @@
 # Diabetes Prediction Application
 ![alt text](image-1.png)
-![alt text](image-2.png)
+
+
 This is a web application for predicting diabetes using a KNN model. The application allows users to input various health parameters and receive a prediction of whether they are likely to have diabetes or not.
+# Sample Input
+![alt text](image-2.png)
 
 ## Setting up the App
 
