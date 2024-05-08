@@ -93,14 +93,14 @@ function Form() {
             className="form-input"
           />
           <input
-            type="number"
+            type="text"
             name="bmi"
             onChange={onChange}
             placeholder="BMI (Body Mass Index)"
             className="form-input"
           />
           <input
-            type="number"
+            type="text"
             name="diabetes_pedigree"
             onChange={onChange}
             placeholder="Diabetes Pedigree Function"
