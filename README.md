@@ -141,3 +141,5 @@ knn.fit(X_train, y_train)
 pickle.dump(knn, open('example_weights_knn.pkl', "wb"))
 ```
 
+![alt text](image.png)
+
