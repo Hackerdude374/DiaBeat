@@ -107,7 +107,7 @@ The K Nearest Neighbors (KNN) algorithm is a simple and effective machine learni
    - For example, if the majority of the K nearest neighbors have diabetes (label 1), the algorithm predicts that the input data point also has diabetes. Otherwise, it predicts that the input data point does not have diabetes (label 0).
 
 ### KNN Model Training Example
-
+```python
 import numpy as np 
 import pandas as pd  
 import pickle 
