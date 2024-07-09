@@ -1,0 +1,4 @@
+jupyter notebook
+jupyter notebook --port 8888
+
+^run either of this in the specific terminal
