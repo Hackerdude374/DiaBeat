@@ -13,14 +13,16 @@ function Form() {
     age: "",
   });
   const [result, setResult] = useState(""); // result display
+  const [loading, setLoading] = useState(false); // loading state
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true); // set loading state to true
 
     const form_data = new FormData();
     form_data.append("1", form.pregnancies);
     form_data.append("2", form.glucose);
-    form_data.append("3", form.blood_pressure); // Changed from blood_presure
+    form_data.append("3", form.blood_pressure);
     form_data.append("4", form.skin_thickness);
     form_data.append("5", form.insulin_level);
     form_data.append("6", form.bmi);
@@ -31,12 +33,14 @@ function Form() {
       method: 'POST',
       body: form_data
     })
-    .then(response => response.text()) // Assuming response is JSON
-    .then(html =>{
+    .then(response => response.text()) // Assuming response is HTML
+    .then(html => {
       setResult(html);
+      setLoading(false); // set loading state to false
     })
     .catch(error => {
       console.error('Error:', error);
+      setLoading(false); // set loading state to false
     });
   };
 
@@ -158,7 +162,8 @@ function Form() {
           />
         </div>
         <button type="submit" className="form-button">Submit Form</button>
-        {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
+        {loading && <div className="loading-spinner"></div>}
+        {result && !loading && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
       </form>
     </div>
   );

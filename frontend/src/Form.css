@@ -6,6 +6,7 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
+  animation: slideIn 0.5s ease-in-out; /* Add animation */
 }
 
 .form-title {
@@ -60,10 +61,30 @@
   }
 }
 
-.form-container {
-  animation: slideIn 0.5s ease-in-out;
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: black;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-.result {
-  color: black;
+/* Loading Spinner */
+.loading-spinner {
+  margin: 20px auto;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
