@@ -1,49 +1,90 @@
 .App {
   text-align: center;
- 
-}
-
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-/* my background */
-.App-header {
-  background: linear-gradient(to bottom, #8a0303, #8a0303 50%, #ff0000 50%, #ff0000); 
+  position: relative;
   min-height: 100vh;
+  overflow: auto;
+}
+
+.App-header {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+
+#tsparticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  z-index: 1;
+  position: relative;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: black;
+}
+
+.form-input {
+  width: calc(50% - 20px);
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: black;
+}
+
+.form-column {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
   color: white;
-  animation: bloodAnimation 5s infinite linear;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-@keyframes bloodAnimation {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 0% 100%;
-  }
-}
-.App-link {
-  color: #61dafb;
+.form-button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
+@keyframes slideIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.form-container {
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.result {
+  color: black;
 }
