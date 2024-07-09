@@ -19,7 +19,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 
 # Read the dataset (CSV file) into a pandas DataFrame
-df = pd.read_csv('cleaned_diabetes.csv')
+df = pd.read_csv('diabetes.csv')
 
 
 # Separate the features (X) and target variable (y) from the DataFrame

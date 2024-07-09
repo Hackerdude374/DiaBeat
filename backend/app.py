@@ -6,16 +6,17 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Load models
+# Load models and scaler
 knn_model = pickle.load(open("knn_model.pkl", "rb"))
 xgb_model = pickle.load(open("xgboost_model.pkl", "rb"))
 logreg_model = pickle.load(open("logistic_regression_model.pkl", "rb"))
+scaler = pickle.load(open("scaler.pkl", "rb"))
 
 @app.route('/')
 def template_deploy():
     return render_template("index.html")
 
-@app.route('/predict', methods=['POST', 'GET'])
+@app.route('/predict', methods=['POST'])
 def predict():
     try:
         # Convert input values to floats
@@ -28,29 +29,36 @@ def predict():
         input_seven = float(request.form['7'])
         input_eight = float(request.form['8'])
 
-        # Setup input data as a DataFrame with the correct feature names
-        data = {
-            'Pregnancies': [input_1],
-            'Glucose': [input_two],
-            'BloodPressure': [input_three],
-            'SkinThickness': [input_four],
-            'Insulin': [input_five],
-            'BMI': [input_six],
-            'DiabetesPedigreeFunction': [input_seven],
-            'Age': [input_eight]
-        }
-        setup_df = pd.DataFrame(data)
+        # Setup input data as a DataFrame with a Series
+        setup_df = pd.DataFrame([pd.Series([input_1, input_two, input_three, input_four, input_five, input_six, input_seven, input_eight],
+                                           index=['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'])])
 
-        # Function to get model prediction in the same format as your old app
-        def get_prediction(model, df):
-            prediction = model.predict_proba(df)
+        # Print input DataFrame for debugging
+        print("Input DataFrame:\n", setup_df)
+
+        # Scale the input data
+        setup_df_scaled = scaler.transform(setup_df)
+
+        # Print scaled DataFrame for debugging
+        print("Scaled Input DataFrame:\n", setup_df_scaled)
+
+        # Function to get model prediction
+        def get_prediction(model, df, scaled=False):
+            if scaled:
+                prediction = model.predict_proba(df)
+            else:
+                prediction = model.predict_proba(setup_df)
             output = '{0:.2f}'.format(prediction[0][1], 2)
+            print(f"Prediction for {model}: {prediction}")
             return str(float(output) * 100) + '%'
 
         # Make predictions using all three models
-        knn_output = get_prediction(knn_model, setup_df)
-        xgb_output = get_prediction(xgb_model, setup_df)
-        logreg_output = get_prediction(logreg_model, setup_df)
+        knn_output = get_prediction(knn_model, setup_df_scaled, scaled=True)
+        xgb_output = get_prediction(xgb_model, setup_df, scaled=False)
+        logreg_output = get_prediction(logreg_model, setup_df_scaled, scaled=True)
+
+        # Print model outputs for debugging
+        print(f"KNN Output: {knn_output}, XGBoost Output: {xgb_output}, Logistic Regression Output: {logreg_output}")
 
         # Determine the best output based on the highest probability
         probabilities = [float(knn_output[:-1]), float(xgb_output[:-1]), float(logreg_output[:-1])]

@@ -13,15 +13,17 @@ print(data.head())
 print("\nMissing Values:")
 print(data.isnull().sum())
 
-# Replace zero values with NaN
-data['Glucose'] = data['Glucose'].replace(0, np.nan)
-data['BloodPressure'] = data['BloodPressure'].replace(0, np.nan)
-data['SkinThickness'] = data['SkinThickness'].replace(0, np.nan)
-data['Insulin'] = data['Insulin'].replace(0, np.nan)
-data['BMI'] = data['BMI'].replace(0, np.nan)
+# Replace zero values with NaN in columns where zero is not a valid value
+columns_to_replace_zero = ['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']
+for column in columns_to_replace_zero:
+    data[column] = data[column].replace(0, np.nan)
 
 # Fill missing values with the mean
 data.fillna(data.mean(), inplace=True)
+
+# Check for missing values after filling
+print("\nMissing Values After Filling:")
+print(data.isnull().sum())
 
 # Remove duplicates
 data.drop_duplicates(inplace=True)
