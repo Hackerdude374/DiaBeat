@@ -3,38 +3,20 @@ import pandas as pd
 import pickle
 from flask_cors import CORS, cross_origin
 
-app = Flask(__name__) 
-CORS(app) #backend to frontend connection
-model = pickle.load(open("example_weights_knn.pkl", "rb"))
+app = Flask(__name__)
+CORS(app)
 
-#when u visit websites, its index.html
-#--------------------------------------------
-#test cors
-@app.route('/some-route')
-@cross_origin()  # Apply CORS to this specific route
-def some_route():
-    return 'This route has CORS enabled.'
+# Load all three models
+knn_model = pickle.load(open("knn_model.pkl", "rb"))
+xgb_model = pickle.load(open("xgboost_model.pkl", "rb"))
+logreg_model = pickle.load(open("logistic_regression_model.pkl", "rb"))
 
-#----------------------------------------------------------
 @app.route('/')
 def template_deploy():
-    return render_template("index.html") #frontend calling
-#----------------------------------------------------------
-
-#------------------------------------------------------------------------------
+    return render_template("index.html")
 
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
-    # Dummy inputs for postman testing
-    # input_one = 5
-    # input_two = 120
-    # input_three = 80
-    # input_four = 30
-    # input_five = 100
-    # input_six = 25
-    # input_seven = 0.5
-    # input_eight = 40
-    
     input_1 = request.form['1']
     input_two = request.form['2']
     input_three = request.form['3']
@@ -46,19 +28,29 @@ def predict():
 
     # Setup input data as a DataFrame
     setup_df = pd.DataFrame([pd.Series([input_1, input_two, input_three, input_four, input_five, input_six, input_seven, input_eight])])
-    diabetes_prediction=model.predict_proba(setup_df)
-    output='{0:.{1}f}'.format(diabetes_prediction[0][1], 2)
-    output = str(float(output)*100)+'%'
-    if output>str(0.5):
-        return render_template('result.html',pred=f'You have the following chance of having diabetes based on our KNN model.\nProbability of having Diabetes is {output}')
+
+    # Make predictions using all three models
+    knn_prediction = knn_model.predict_proba(setup_df)
+    xgb_prediction = xgb_model.predict_proba(setup_df)
+    logreg_prediction = logreg_model.predict_proba(setup_df)
+
+    # Get the probability of having diabetes for each model
+    knn_output = '{0:.{1}f}'.format(knn_prediction[0][1], 2)
+    xgb_output = '{0:.{1}f}'.format(xgb_prediction[0][1], 2)
+    logreg_output = '{0:.{1}f}'.format(logreg_prediction[0][1], 2)
+
+    # Convert probabilities to percentages
+    knn_output = str(float(knn_output) * 100) + '%'
+    xgb_output = str(float(xgb_output) * 100) + '%'
+    logreg_output = str(float(logreg_output) * 100) + '%'
+
+    # Determine the best output based on the highest probability
+    best_output = max(float(knn_output[:-1]), float(xgb_output[:-1]), float(logreg_output[:-1]))
+
+    if best_output > 50:
+        return render_template('result.html', pred=f'You have the following chances of having diabetes based on our models:\n\nKNN: {knn_output}\nXGBoost: {xgb_output}\nLogistic Regression: {logreg_output}\n\nThe best model predicts a {best_output}% probability of having diabetes.')
     else:
-        return render_template('result.html',pred=f'You have a low chance of diabetes which is currently considered safe (this is only an example, please consult a certified doctor for any medical advice).\n Probability of having diabetes is {output}')
+        return render_template('result.html', pred=f'You have the following chances of having diabetes based on our models:\n\nKNN: {knn_output}\nXGBoost: {xgb_output}\nLogistic Regression: {logreg_output}\n\nThe best model predicts a low probability of diabetes, which is currently considered safe (this is only an example, please consult a certified doctor for any medical advice).')
 
-#----------------------------------------------------------------------------------------------
-
-# debugging 
-
-
-# Run the Flask app if the script is executed directly
 if __name__ == '__main__':
     app.run(debug=True)
