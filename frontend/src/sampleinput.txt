@@ -1,0 +1,8 @@
+pregnancies=5
+glucose=120
+blood_pressure=70
+skin_thickness=25
+insulin_level=110
+bmi=28.1
+diabetes_pedigree=0.627
+age=50

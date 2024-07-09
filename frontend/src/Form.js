@@ -12,7 +12,7 @@ function Form() {
     diabetes_pedigree: "",
     age: "",
   });
-  const [result, setResult] = useState(""); //result display
+  const [result, setResult] = useState(""); // result display
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,22 +52,24 @@ function Form() {
 
     reader.onload = (e) => {
       const content = e.target.result;
-      const values = content.split('\n').map(val => val.trim());
+      const lines = content.split('\n');
+      const values = {};
 
-      if (values.length >= 8) {
-        setForm({
-          pregnancies: values[0],
-          glucose: values[1],
-          blood_pressure: values[2],
-          skin_thickness: values[3],
-          insulin_level: values[4],
-          bmi: values[5],
-          diabetes_pedigree: values[6],
-          age: values[7],
-        });
-      } else {
-        alert("The file does not contain enough data.");
-      }
+      lines.forEach(line => {
+        const [key, value] = line.split('=').map(part => part.trim().toLowerCase());
+        values[key] = value;
+      });
+
+      setForm({
+        pregnancies: values.pregnancies || "",
+        glucose: values.glucose || "",
+        blood_pressure: values.blood_pressure || "",
+        skin_thickness: values.skin_thickness || "",
+        insulin_level: values.insulin_level || "",
+        bmi: values.bmi || "",
+        diabetes_pedigree: values.diabetes_pedigree || "",
+        age: values.age || "",
+      });
     };
 
     if (file) {

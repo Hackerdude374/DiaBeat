@@ -8,18 +8,19 @@ CORS(app)
 
 # Load models and scaler
 knn_model = pickle.load(open("knn_model.pkl", "rb"))
-xgb_model = pickle.load(open("xgboost_model.pkl", "rb"))
-logreg_model = pickle.load(open("logistic_regression_model.pkl", "rb"))
+xgb_model = pickle.load(open("xgb_model.pkl", "rb"))
+logreg_model = pickle.load(open("logreg_model.pkl", "rb"))
+rf_model = pickle.load(open("rf_model.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 
 @app.route('/')
 def template_deploy():
     return render_template("index.html")
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST', 'GET'])
 def predict():
     try:
-        # Convert input values to floats
+        # Get input values and convert to floats
         input_1 = float(request.form['1'])
         input_two = float(request.form['2'])
         input_three = float(request.form['3'])
@@ -52,26 +53,26 @@ def predict():
             print(f"Prediction for {model}: {prediction}")
             return str(float(output) * 100) + '%'
 
-        # Make predictions using all three models
+        # Make predictions using all four models
         knn_output = get_prediction(knn_model, setup_df_scaled, scaled=True)
         xgb_output = get_prediction(xgb_model, setup_df, scaled=False)
         logreg_output = get_prediction(logreg_model, setup_df_scaled, scaled=True)
+        rf_output = get_prediction(rf_model, setup_df_scaled, scaled=True)
 
         # Print model outputs for debugging
-        print(f"KNN Output: {knn_output}, XGBoost Output: {xgb_output}, Logistic Regression Output: {logreg_output}")
+        print(f"KNN Output: {knn_output}, XGBoost Output: {xgb_output}, Logistic Regression Output: {logreg_output}, Random Forest Output: {rf_output}")
 
         # Determine the best output based on the highest probability
-        probabilities = [float(knn_output[:-1]), float(xgb_output[:-1]), float(logreg_output[:-1])]
+        probabilities = [float(knn_output[:-1]), float(xgb_output[:-1]), float(logreg_output[:-1]), float(rf_output[:-1])]
         best_output = max(probabilities)
 
-        if best_output > 50:
-            message = f'You have the following chances of having diabetes based on our models:\n\nKNN: {knn_output}\nXGBoost: {xgb_output}\nLogistic Regression: {logreg_output}\n\nThe best model predicts a {best_output}% probability of having diabetes.'
-        else:
-            message = f'You have the following chances of having diabetes based on our models:\n\nKNN: {knn_output}\nXGBoost: {xgb_output}\nLogistic Regression: {logreg_output}\n\nThe best model predicts a low probability of diabetes, which is currently considered safe (this is only an example, please consult a certified doctor for any medical advice).'
+        message = (f'KNN: {knn_output} XGBoost: {xgb_output} Logistic Regression: {logreg_output} Random Forest: {rf_output} '
+                   f'The best model predicts a {best_output}% probability of having diabetes.')
 
         return render_template('result.html', pred=message)
     except ValueError:
         return render_template('result.html', pred='Invalid input. Please enter valid numbers.')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

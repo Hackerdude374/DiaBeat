@@ -1,4 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<p>{{pred}}</p>
+<html>
+<head>
+    <title>Diabetes Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .result {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .result p {
+            margin: 10px 0;
+        }
+        .model-result {
+            margin: 15px 0;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Diabetes Prediction Result</h2>
+        </div>
+        <div class="result">
+            <p>You have the following chances of having diabetes based on our models:</p>
+            <div class="model-result">
+                <p>KNN: <span class="highlight">{{ pred.split('KNN: ')[1].split(' ')[0] }}</span></p>
+                <p>XGBoost: <span class="highlight">{{ pred.split('XGBoost: ')[1].split(' ')[0] }}</span></p>
+                <p>Logistic Regression: <span class="highlight">{{ pred.split('Logistic Regression: ')[1].split(' ')[0] }}</span></p>
+                <p>Random Forest: <span class="highlight">{{ pred.split('Random Forest: ')[1].split(' ')[0] }}</span></p>
+            </div>
+            <p>The best model predicts a <span class="highlight">{{ pred.split('The best model predicts a ')[1].split(' ')[0] }}</span> probability of having diabetes.</p>
+            <p><small>This is only an example, please consult a certified doctor for any medical advice.</small></p>
+        </div>
+    </div>
+</body>
 </html>
