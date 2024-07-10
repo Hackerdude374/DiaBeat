@@ -1,18 +1,21 @@
 import React from 'react';
-import diabeatLogo from './DiaBeatLogo.png';
 import './App.css';
 import Form from './Form';
+import DiaBeatLogo from './DiaBeatLogo.png';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <nav className="navbar">
-          <img src={diabeatLogo} className="navbar-logo" alt="DiaBeatLogo" />
-          <div className="navbar-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+          <div className="navbar-left">
+            <img src={DiaBeatLogo} alt="Logo" className="navbar-logo" />
+            <span className="navbar-title">Diabeat</span>
+          </div>
+          <div className="navbar-right">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
           </div>
         </nav>
         <Form />

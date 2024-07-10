@@ -1,4 +1,4 @@
-/* NavBar Styles */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -6,110 +6,78 @@
   background-color: white;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-logo {
-  height: 60px; /* Adjust the size of the logo as needed */
+  width: 50px;
+  margin-right: 10px;
 }
 
-.navbar-links a {
-  color: black;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 18px;
-}
-
-.navbar-links a:hover {
-  text-decoration: underline;
-}
-
-/* Form Styles */
-.form-container {
-  max-width: 800px; /* Adjust the max-width as needed */
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  animation: slideIn 0.5s ease-in-out; /* Add animation */
-}
-
-.form-title {
-  text-align: center;
-  margin-bottom: 20px;
+.navbar-title {
   font-size: 24px;
-  color: black;
+  font-weight: bold;
+  color: #333;
 }
 
-.form-input {
-  width: calc(50% - 20px); /* Adjust the width of each input */
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
-  color: black;
-}
-
-.form-column {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.form-button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+.navbar-right a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
   font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.form-button:hover {
-  background-color: #0056b3;
+.navbar-right a:hover {
+  color: #007bff;
 }
 
-/* Animation */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Result Popup */
-.result-popup {
+/* Popup */
+.popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background: white;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.popup-logo {
+  width: 100px; /* Adjust the size as needed */
+  margin-bottom: 20px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: red;
 }
 
 /* Loading Spinner */
 .loading-spinner {
-  margin: 20px auto;
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #007bff;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
+  margin: 20px auto;
 }
 
 @keyframes spin {
@@ -131,4 +99,5 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding-top: 60px; /* Adjust for navbar height */
 }

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './Form.css';
+import DiaBeatLogo from './DiaBeatLogo.png';
 
 function Form() {
   const [form, setForm] = useState({
@@ -12,12 +13,13 @@ function Form() {
     diabetes_pedigree: "",
     age: "",
   });
-  const [result, setResult] = useState(""); // result display
-  const [loading, setLoading] = useState(false); // loading state
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true); // set loading state to true
+    setLoading(true);
 
     const form_data = new FormData();
     form_data.append("1", form.pregnancies);
@@ -33,14 +35,15 @@ function Form() {
       method: 'POST',
       body: form_data
     })
-    .then(response => response.text()) // Assuming response is HTML
+    .then(response => response.text())
     .then(html => {
       setResult(html);
-      setLoading(false); // set loading state to false
+      setLoading(false);
+      setShowPopup(true);
     })
     .catch(error => {
       console.error('Error:', error);
-      setLoading(false); // set loading state to false
+      setLoading(false);
     });
   };
 
@@ -79,6 +82,10 @@ function Form() {
     if (file) {
       reader.readAsText(file);
     }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -163,7 +170,13 @@ function Form() {
         </div>
         <button type="submit" className="form-button">Submit Form</button>
         {loading && <div className="loading-spinner"></div>}
-        {result && !loading && <div dangerouslySetInnerHTML={{ __html: result }} className="result-popup" />}
+        {showPopup && (
+          <div className="popup">
+            <button className="close-button" onClick={closePopup}>&times;</button>
+            <img src={DiaBeatLogo} alt="Logo" className="popup-logo" />
+            <div dangerouslySetInnerHTML={{ __html: result }} className="result" />
+          </div>
+        )}
       </form>
     </div>
   );
