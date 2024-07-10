@@ -160,11 +160,11 @@ Matching Models to Dataset Characteristics
 ## K-Nearest Neighbors (KNN)
 Match with dataset:
 
-Feature Type Compatibility: KNN works well with numerical features because it relies on distance metrics (e.g., Euclidean distance) to find the nearest neighbors. In the context of diabetes prediction, numerical data such as glucose level and BMI are crucial in determining the proximity of a new patient’s data to existing patients in the dataset. For instance, similar glucose levels often correlate with similar diabetes outcomes.
+- Feature Type Compatibility: KNN works well with numerical features because it relies on distance metrics (e.g., Euclidean distance) to find the nearest neighbors. In the context of diabetes prediction, numerical data such as glucose level and BMI are crucial in determining the proximity of a new patient’s data to existing patients in the dataset. For instance, similar glucose levels often correlate with similar diabetes outcomes.
 
-Dataset Size: The dataset size (768 instances) is manageable for KNN, which can become computationally expensive for much larger datasets. Research indicates that for medical datasets of this size, KNN provides a balance between simplicity and computational efficiency.
+- Dataset Size: The dataset size (768 instances) is manageable for KNN, which can become computationally expensive for much larger datasets. Research indicates that for medical datasets of this size, KNN provides a balance between simplicity and computational efficiency.
 
-Imbalance Handling: While KNN does not inherently handle imbalanced classes, it can still perform reasonably well if the distance metric and the number of neighbors are appropriately tuned. Adjustments such as using weighted KNN, where closer neighbors have a larger influence, can help mitigate class imbalance.
+- Imbalance Handling: While KNN does not inherently handle imbalanced classes, it can still perform reasonably well if the distance metric and the number of neighbors are appropriately tuned. Adjustments such as using weighted KNN, where closer neighbors have a larger influence, can help mitigate class imbalance.
 ## Logistic Regression
 Match with dataset:
 
