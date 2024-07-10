@@ -181,7 +181,7 @@ Match with dataset:
 
 - Non-linearity: XGBoost can capture complex non-linear relationships between features and the target variable, making it suitable for datasets where such relationships exist. For example, the interaction between insulin levels, BMI, and age in predicting diabetes can be non-linear, which XGBoost can effectively model.
 
-Random Forest
+
 ## Random Forest
 Match with dataset:
 
