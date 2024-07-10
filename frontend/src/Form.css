@@ -1,3 +1,29 @@
+/* NavBar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+  height: 60px; /* Adjust the size of the logo as needed */
+}
+
+.navbar-links a {
+  color: black;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 18px;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+
+/* Form Styles */
 .form-container {
   max-width: 800px; /* Adjust the max-width as needed */
   margin: 0 auto;
@@ -61,16 +87,18 @@
   }
 }
 
-.result {
-  margin-top: 20px;
-  padding: 20px;
+/* Result Popup */
+.result-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
+  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: black;
-  font-size: 18px;
-  line-height: 1.6;
+  z-index: 1000;
 }
 
 /* Loading Spinner */
@@ -87,4 +115,20 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* App Background */
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #6f0000; /* Darker red background */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }

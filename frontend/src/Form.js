@@ -163,7 +163,7 @@ function Form() {
         </div>
         <button type="submit" className="form-button">Submit Form</button>
         {loading && <div className="loading-spinner"></div>}
-        {result && !loading && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
+        {result && !loading && <div dangerouslySetInnerHTML={{ __html: result }} className="result-popup" />}
       </form>
     </div>
   );
